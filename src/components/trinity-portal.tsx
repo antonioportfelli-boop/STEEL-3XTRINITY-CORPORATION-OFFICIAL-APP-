@@ -167,11 +167,10 @@ export function TrinityPortal() {
           <a href="#manifesto">MANIFESTO</a>
         </div>
         <Link
-          to="/modules/$module"
-          params={{ module: "artwork" }}
+          to="/client/workbench"
           className="rounded-full border border-white/25 px-4 py-2 font-mono text-xs tracking-wider transition hover:bg-white hover:text-black"
         >
-          ENTER LAB
+          START A PROJECT
         </Link>
       </header>
       <main>
@@ -192,12 +191,12 @@ export function TrinityPortal() {
               independent, interoperable modules.
             </p>
             <div className="mt-10 flex flex-wrap gap-3">
-              <a
-                href="#modules"
+              <Link
+                to="/client/workbench"
                 className="rounded-full bg-white px-6 py-3 text-sm font-medium text-black transition hover:bg-cyan-200"
               >
-                View modules
-              </a>
+                Start a project
+              </Link>
               <Link
                 to="/modules/$module"
                 params={{ module: "aura" }}
@@ -231,8 +230,8 @@ export function TrinityPortal() {
               <h2 className="mt-3 text-4xl sm:text-5xl">One identity. Many entry points.</h2>
             </div>
             <p className="max-w-sm text-sm leading-6 text-white/55">
-              Each module has its own introduction page and a direct path into its dedicated
-              workspace.
+              Start with a client-ready project direction, then move into the exact workspace that
+              makes it real.
             </p>
           </div>
           <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
