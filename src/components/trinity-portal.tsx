@@ -5,11 +5,15 @@ import {
   Blocks,
   Bot,
   Cpu,
+  GitFork,
   Eye,
   Network,
+  Server,
+  SlidersHorizontal,
   Orbit,
   ShieldCheck,
   Sparkles,
+  Workflow,
 } from "lucide-react";
 import { useEffect, useRef } from "react";
 
@@ -22,7 +26,7 @@ export const modules = [
     summary: "A composition desk for patterns, voice, film and live signal.",
     accent: "from-orange-400 via-amber-200 to-yellow-50",
     icon: AudioLines,
-    workspace: "studio",
+    href: "/workspace/studio",
   },
   {
     slug: "aura",
@@ -32,7 +36,7 @@ export const modules = [
     summary: "Reactive canvas scenes for sound, light and captured performance.",
     accent: "from-fuchsia-500 via-violet-500 to-cyan-200",
     icon: Orbit,
-    workspace: "aura",
+    href: "/workspace/aura",
   },
   {
     slug: "command",
@@ -42,7 +46,7 @@ export const modules = [
     summary: "A focused operational layer for the 3XTRINITY network.",
     accent: "from-sky-400 via-cyan-300 to-emerald-100",
     icon: Network,
-    workspace: "console",
+    href: "/workspace/command",
   },
   {
     slug: "kernel",
@@ -52,7 +56,7 @@ export const modules = [
     summary: "Inspect the STEEL runtime, hosts and the active system channel.",
     accent: "from-slate-200 via-zinc-400 to-emerald-200",
     icon: Cpu,
-    workspace: "kernel",
+    href: "/workspace/kernel",
   },
   {
     slug: "audit",
@@ -62,7 +66,7 @@ export const modules = [
     summary: "Review permissions, signals and evidence across the working surface.",
     accent: "from-rose-400 via-orange-300 to-stone-100",
     icon: ShieldCheck,
-    workspace: "audit",
+    href: "/workspace/audit",
   },
   {
     slug: "artwork",
@@ -72,7 +76,57 @@ export const modules = [
     summary: "A prompt-led art direction space for campaign worlds and visual systems.",
     accent: "from-lime-300 via-teal-300 to-blue-200",
     icon: Sparkles,
-    workspace: "desk",
+    href: "/workspace/desk",
+  },
+  {
+    slug: "pipeline",
+    index: "07",
+    title: "Signal Pipeline",
+    eyebrow: "Audio / routing",
+    summary: "Shape a live audio chain with controllable inserts and a web output tap.",
+    accent: "from-emerald-300 via-cyan-300 to-sky-100",
+    icon: GitFork,
+    href: "/workspace/pipeline",
+  },
+  {
+    slug: "hosts",
+    index: "08",
+    title: "Host Matrix",
+    eyebrow: "MIDI / systems",
+    summary: "Map host profiles, operating systems and control surfaces for live work.",
+    accent: "from-slate-300 via-blue-300 to-violet-200",
+    icon: Server,
+    href: "/workspace/hosts",
+  },
+  {
+    slug: "fleet",
+    index: "09",
+    title: "Delivery Fleet",
+    eyebrow: "AI / delivery",
+    summary: "Assemble a 15-role delivery sequence with visible approval gates.",
+    accent: "from-cyan-300 via-teal-300 to-emerald-100",
+    icon: Workflow,
+    href: "/client/fleet",
+  },
+  {
+    slug: "orchestrator",
+    index: "10",
+    title: "Project Orchestrator",
+    eyebrow: "Client / workflow",
+    summary: "Prepare transparent, human-controlled handoffs across creative disciplines.",
+    accent: "from-indigo-300 via-violet-300 to-fuchsia-200",
+    icon: Network,
+    href: "/client/orchestrator",
+  },
+  {
+    slug: "modulation",
+    index: "11",
+    title: "Modulation Lab",
+    eyebrow: "AURA / control",
+    summary: "Design reactive visual scenes and move directly into the live visualizer.",
+    accent: "from-rose-300 via-fuchsia-300 to-cyan-200",
+    icon: SlidersHorizontal,
+    href: "/client/modulation",
   },
 ] as const;
 
@@ -126,9 +180,8 @@ function SignalCanvas() {
 function ModuleCard({ module }: { module: Module }) {
   const Icon = module.icon;
   return (
-    <Link
-      to="/modules/$module"
-      params={{ module: module.slug }}
+    <a
+      href={module.href}
       className="group relative min-h-72 overflow-hidden rounded-3xl border border-white/10 bg-white/[0.045] p-6 transition duration-500 hover:-translate-y-1 hover:border-white/30 hover:bg-white/[0.08]"
     >
       <div
@@ -151,7 +204,7 @@ function ModuleCard({ module }: { module: Module }) {
           <ArrowUpRight className="size-4 transition group-hover:translate-x-1 group-hover:-translate-y-1" />
         </div>
       </div>
-    </Link>
+    </a>
   );
 }
 
@@ -209,7 +262,7 @@ export function TrinityPortal() {
           <div className="relative z-10 grid gap-3 self-center lg:justify-self-end">
             <div className="rounded-2xl border border-white/15 bg-black/30 p-5 backdrop-blur">
               <p className="font-mono text-xs tracking-widest text-white/40">NETWORK MAP</p>
-              <p className="mt-2 text-2xl">6 modular gateways</p>
+              <p className="mt-2 text-2xl">11 modular gateways</p>
             </div>
             <div className="grid grid-cols-2 gap-3">
               <div className="rounded-2xl border border-white/10 bg-white/5 p-5">
@@ -279,13 +332,12 @@ export function ModuleLanding({ module }: { module: Module }) {
             This is the module’s entry layer: orientation, intent and a direct gateway into the live
             workspace.
           </p>
-          <Link
-            to="/workspace/$module"
-            params={{ module: module.workspace }}
+          <a
+            href={module.href}
             className="mt-10 inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-medium text-black transition hover:bg-cyan-200"
           >
             Open {module.title} <ArrowUpRight className="size-4" />
-          </Link>
+          </a>
         </div>
         <div className="relative min-h-80 overflow-hidden rounded-3xl border border-white/15 bg-white/[0.04] p-8">
           <div className={`absolute inset-0 bg-gradient-to-br ${module.accent} opacity-20`} />
