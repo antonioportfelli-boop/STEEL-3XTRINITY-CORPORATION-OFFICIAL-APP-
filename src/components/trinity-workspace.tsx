@@ -5,6 +5,8 @@ import { SteelAudit } from "@/components/steel-audit";
 import { SteelConsole } from "@/components/steel-console";
 import { SteelDesk } from "@/components/steel-desk";
 import { SteelKernel } from "@/components/steel-kernel";
+import { SteelPipeline } from "@/components/steel-pipeline";
+import { SteelHosts } from "@/components/steel-hosts";
 import { SteelStudio } from "@/components/steel-studio";
 import { useSteel } from "@/lib/steel/store";
 import type { SteelTab } from "@/lib/steel/types";
@@ -16,6 +18,8 @@ const tabs: Record<string, SteelTab> = {
   kernel: "kernel",
   audit: "audit",
   desk: "desk",
+  pipeline: "pipeline",
+  hosts: "hosts",
 };
 
 export function isWorkspaceModule(slug: string) {
@@ -38,6 +42,8 @@ export function TrinityWorkspace({ slug }: { slug: string }) {
       {tab === "aura" ? <AuraStage /> : null}
       {tab === "kernel" ? <SteelKernel /> : null}
       {tab === "audit" ? <SteelAudit /> : null}
+      {tab === "pipeline" ? <SteelPipeline /> : null}
+      {tab === "hosts" ? <SteelHosts /> : null}
     </AppShell>
   );
 }
