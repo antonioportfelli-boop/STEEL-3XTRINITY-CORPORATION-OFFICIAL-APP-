@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ClientOrchestratorRouteImport } from './routes/client/orchestrator'
 import { Route as ClientWorkbenchRouteImport } from './routes/client/workbench'
 import { Route as ModulesModuleRouteImport } from './routes/modules/$module'
 import { Route as WorkspaceModuleRouteImport } from './routes/workspace/$module'
@@ -17,6 +18,11 @@ import { Route as WorkspaceModuleRouteImport } from './routes/workspace/$module'
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ClientOrchestratorRoute = ClientOrchestratorRouteImport.update({
+  id: '/client/orchestrator',
+  path: '/client/orchestrator',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ClientWorkbenchRoute = ClientWorkbenchRouteImport.update({
@@ -37,12 +43,14 @@ const WorkspaceModuleRoute = WorkspaceModuleRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/client/orchestrator': typeof ClientOrchestratorRoute
   '/client/workbench': typeof ClientWorkbenchRoute
   '/modules/$module': typeof ModulesModuleRoute
   '/workspace/$module': typeof WorkspaceModuleRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/client/orchestrator': typeof ClientOrchestratorRoute
   '/client/workbench': typeof ClientWorkbenchRoute
   '/modules/$module': typeof ModulesModuleRoute
   '/workspace/$module': typeof WorkspaceModuleRoute
@@ -50,6 +58,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/client/orchestrator': typeof ClientOrchestratorRoute
   '/client/workbench': typeof ClientWorkbenchRoute
   '/modules/$module': typeof ModulesModuleRoute
   '/workspace/$module': typeof WorkspaceModuleRoute
@@ -57,12 +66,22 @@ export interface FileRoutesById {
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/client/workbench' | '/modules/$module' | '/workspace/$module'
+    | '/'
+    | '/client/orchestrator'
+    | '/client/workbench'
+    | '/modules/$module'
+    | '/workspace/$module'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/client/workbench' | '/modules/$module' | '/workspace/$module'
+  to:
+    | '/'
+    | '/client/orchestrator'
+    | '/client/workbench'
+    | '/modules/$module'
+    | '/workspace/$module'
   id:
     | '__root__'
     | '/'
+    | '/client/orchestrator'
     | '/client/workbench'
     | '/modules/$module'
     | '/workspace/$module'
@@ -70,6 +89,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ClientOrchestratorRoute: typeof ClientOrchestratorRoute
   ClientWorkbenchRoute: typeof ClientWorkbenchRoute
   ModulesModuleRoute: typeof ModulesModuleRoute
   WorkspaceModuleRoute: typeof WorkspaceModuleRoute
@@ -82,6 +102,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/client/orchestrator': {
+      id: '/client/orchestrator'
+      path: '/client/orchestrator'
+      fullPath: '/client/orchestrator'
+      preLoaderRoute: typeof ClientOrchestratorRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/client/workbench': {
@@ -110,6 +137,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ClientOrchestratorRoute: ClientOrchestratorRoute,
   ClientWorkbenchRoute: ClientWorkbenchRoute,
   ModulesModuleRoute: ModulesModuleRoute,
   WorkspaceModuleRoute: WorkspaceModuleRoute,
